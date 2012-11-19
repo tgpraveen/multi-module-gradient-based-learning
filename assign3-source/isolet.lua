@@ -16,18 +16,20 @@ function isolet:testsize() return 1559 end
 function isolet:features() return 617 end
 
 -- We have 26 classes, where the digit i is class (i+1).
-function mnist:classes() return 26 end
+function isolet:classes() return 26 end
 
 -- Read csv files from the isolet1+2+3+4.data
 function isolet:readFile()
    -- CSV reading using simple regular expression :)
    isolet.orig = {}
+   isolet.orig.train = {}
+   isolet.orig.test = {}
    local file = 'isolet1+2+3+4.data'
    local fp = assert(io.open (file))
    local csvtable = {}
    for line in fp:lines() do
       local row = {}
-      for value in line:gmatch("[^,]\s+") do
+      for value in line:gmatch("[^,]+") do
 	 -- note: doesn\'t work with strings that contain , values
 	 row[#row+1] = value
       end
@@ -81,7 +83,7 @@ function isolet:readFile()
       -- it should be class -1 if output is 0
       -- if output[1] == 0 then output[1] = -1 end
       -- Shuffled dataset
-      isolet.orig.test[rorder[i]] = {input, output}
+      isolet.orig.test[rorder2[i]] = {input, output}
    end
 end
 
@@ -165,7 +167,7 @@ end
 -- Get the train and test datasets
 function isolet:getDatasets(train_size, test_size)
    -- If file not read, read the files
-   if isolet.orig.train[1] == nil then isolet:readFile() end
+   if isolet.orig == nil then isolet:readFile() end
    -- Split the dataset
    local train, test = isolet:split(train_size, test_size)
    -- Normalize the dataset
