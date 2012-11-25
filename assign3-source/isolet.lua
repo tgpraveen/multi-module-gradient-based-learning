@@ -6,6 +6,9 @@ Original dataset from http://archive.ics.uci.edu/ml/datasets/ISOLET
 -- the spambase dataset
 isolet = {};
 
+-- The dataset has 7797 rows (observation)
+function isolet:size() return 7797 end
+
 -- The dataset has 6238 rows in train dataset (observation)
 function isolet:trainsize() return 6238 end
 

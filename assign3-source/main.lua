@@ -12,12 +12,14 @@ This file contains sample of experiments.
 -- Load required libraries and files
 dofile("isolet.lua")
 dofile("whitening.lua")
+dofile("model.lua")
 
 function main()
    -- 1. Load isolet dataset
-   print("Initializing datasets...")
+    print("Initializing datasets...")
     local data_train_isolet, data_test_isolet = isolet:getDatasets(600,400)
-    local whitened_data_train_isolet, whitened_data_train_isolet = whitenDatasets(data_train_isolet, data_test_isolet, 100)
+
+    -- local whitened_data_train_isolet, whitened_data_train_isolet = whitenDatasets(data_train_isolet, data_test_isolet, 100)
 
 --[[
     function printDataSet()
@@ -36,7 +38,7 @@ function main()
  printDataSet()
 ]]
 
----[[
+--[[
     function printWhitenDataSet()
     print("Whitened Training set:")
     for i = 1,1 do
@@ -51,9 +53,19 @@ function main()
    end
     end
  printDataSet()
---]]
+]]
+print(data_train_isolet)
+-- Logistic Regression code:
+local logisticRegressionTrainer = logisticRegression(data_train_isolet)
+-- local logisticRegression_loss_train, logisticRegression_error_train = trainer:train(data_train_isolet) -- train using some examples
+-- local logisticRegression_loss_test, logisticRegression_error_test = trainer:test(data_test_isolet) -- test using some datapoints
+print("Pro")
+--print(data_train_isolet)
+print(trainer:train(data_train_isolet))
 
 
+
+print("Logistic Regression: Training loss is "..logisticRegression_loss_train.." Training error is "..logisticRegression_error_train.."Testing loss is "..logisticRegression_loss_test.." Testing error is "..logisticRegression_error_test)
 
 end
 
