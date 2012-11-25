@@ -11,13 +11,15 @@ This file contains sample of experiments.
 
 -- Load required libraries and files
 dofile("isolet.lua")
+dofile("whitening.lua")
 
 function main()
    -- 1. Load isolet dataset
    print("Initializing datasets...")
-    local data_train_isolet, data_test_isolet = isolet:getDatasets(10,6)
-   
---[[ 
+    local data_train_isolet, data_test_isolet = isolet:getDatasets(600,400)
+    local whitened_data_train_isolet, whitened_data_train_isolet = whitenDatasets(data_train_isolet, data_test_isolet, 100)
+
+--[[
     function printDataSet()
     print("Training set:")
     for i = 1,1 do
@@ -33,6 +35,23 @@ function main()
     end
  printDataSet()
 ]]
+
+---[[
+    function printWhitenDataSet()
+    print("Whitened Training set:")
+    for i = 1,1 do
+      -- print("["..i.."][1]: "..data_train_isolet[i][1])
+      print(whitened_data_train_isolet[i][1])
+      print(whitened_data_train_isolet[i][2])
+   end
+   print("Whitened Testing set:")
+    for i = 1,data_test_isolet:size() do
+      print("["..i.."][1]: "..whitened_data_test_isolet[i][1])
+      print("["..i.."][2]: "..whitened_data_test_isolet[i][2])
+   end
+    end
+ printDataSet()
+--]]
 
 
 
