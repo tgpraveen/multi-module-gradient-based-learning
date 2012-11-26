@@ -23,7 +23,7 @@ include("model.lua")
 function main()
    -- 1. Load isolet dataset
     print("Initializing datasets...")
-    local data_train_isolet, data_test_isolet = isolet:getDatasets(600,400)
+    local data_train_isolet, data_test_isolet = isolet:getDatasets(600,100)
 
     -- local whitened_data_train_isolet, whitened_data_train_isolet = whitenDatasets(data_train_isolet, data_test_isolet, 100)
 
