@@ -29,7 +29,7 @@ include("RBF.lua")
 include("MulPos.lua")
 include("NegExp.lua")
 
-dofile("Q_4_1.lua")
+dofile("Q_4_1_and_2.lua")
 
 function main()
 
@@ -39,7 +39,7 @@ function main()
     print("Initializing datasets...")
     local data_train_isolet, data_test_isolet = isolet:getDatasets(600,100)
 	
-    -- local whitened_data_train_isolet, whitened_data_train_isolet = whitenDatasets(data_train_isolet, data_test_isolet, 100)
+    -- local whitened_data_train_isolet, whitened_data_test_isolet = whitenDatasets(data_train_isolet, data_test_isolet, 100)
 
 	--local data_train_one_vs_all, data_test_one_vs_all = mnist:getDatasets(6000,1000)
 
@@ -78,8 +78,8 @@ function main()
 ]]
 --print(data_train_isolet)
 -- Logistic Regression code:
---local logisticRegressionTrainer, logisticRegressionMLP = logisticRegression(data_train_isolet, data_test_isolet)
-local twoLayerNNTrainer, twoLayerNNMLP = twoLayerNN(data_train_isolet, data_test_isolet)
+--local logisticRegressionTrainer, logisticRegressionMLP, logisticRegressionTestError = logisticRegression(data_train_isolet, data_test_isolet)
+local twoLayerNNTrainer, twoLayerNNMLP, twoLayerTestError = twoLayerNN(data_train_isolet, data_test_isolet)
 
 --local logisticRegressionTrainer = logisticRegression(data_train_one_vs_all)
 
