@@ -13,7 +13,10 @@ This file contains sample of experiments.
 dofile("isolet.lua")
 dofile("whitening.lua")
 dofile("model.lua")
+
 dofile("RBF.lua")
+dofile("MulPos.lua")
+dofile("NegExp.lua")
 
 --dofile("mnist.lua")
 
@@ -23,7 +26,10 @@ require("nn")
 
 require("libnn")
 include("RBF.lua")
+include("MulPos.lua")
+include("NegExp.lua")
 
+dofile("Q_4_1.lua")
 
 function main()
 
