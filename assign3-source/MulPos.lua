@@ -1,5 +1,7 @@
 `require 'nn' 
 
+--use math.exp(w) ??
+
 local MulPos, parent = torch.class('nn.MulPos', 'nn.Module')
 
 function MulPos:__init(inputSize)
@@ -38,6 +40,7 @@ function MulPos:updateGradInput(input, gradOutput)
 end
 
 function MulPos:accGradParameters(input, gradOutput, scale) 
+   -- scale is learning rate.
    scale = scale or 1
    self.gradWeight[1] = self.gradWeight[1] + scale*input:dot(gradOutput);
 end
