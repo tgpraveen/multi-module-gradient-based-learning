@@ -64,7 +64,8 @@ function main()
 ]]
 --print(data_train_isolet)
 -- Logistic Regression code:
-local logisticRegressionTrainer = logisticRegression(data_train_isolet, data_test_isolet)
+local logisticRegressionTrainer, logisticRegressionMLP = logisticRegression(data_train_isolet, data_test_isolet)
+local twoLayerNNTrainer, twoLayerNNMLP = twoLayerNN(data_train_isolet, data_test_isolet)
 
 --local logisticRegressionTrainer = logisticRegression(data_train_one_vs_all)
 
