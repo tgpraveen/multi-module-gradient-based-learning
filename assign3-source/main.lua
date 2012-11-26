@@ -74,8 +74,6 @@ local logisticRegressionTrainer = logisticRegression(data_train_isolet, data_tes
 --print(data_train_isolet)
 --print("complete dataset size "..data_train_one_vs_all:size())
 -- print("1's size "..data_train_isolet[1]:size())
-
-print(mlp:forward(data_test_isolet))
 --trainer:train(data_train_one_vs_all)
 
 

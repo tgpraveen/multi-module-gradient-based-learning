@@ -12,5 +12,18 @@ trainer = nn.StochasticGradient(mlp, criterion)
 trainer.learningRate = 0.01
 trainer.maxIteration = 100
 trainer:train(traindataset)
+--[[print("testdataset[1]")
+print(testdataset[1])
+print("testdataset[1][1]")
+print(testdataset[1][1])
+print("testdataset[1][2]")
+print(testdataset[2][2])
+print("Prediction:")
+print(mlp:forward(testdataset[2][1]))
+--]]
+for q=1, testdataset:size() do
+
+end
+
 return trainer, mlp
 end
