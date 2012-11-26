@@ -14,12 +14,20 @@ dofile("isolet.lua")
 dofile("whitening.lua")
 dofile("model.lua")
 
+--dofile("mnist.lua")
+
+require("nn")
+require("libnn")
+include("model.lua")
+
 function main()
    -- 1. Load isolet dataset
     print("Initializing datasets...")
     local data_train_isolet, data_test_isolet = isolet:getDatasets(600,400)
 
     -- local whitened_data_train_isolet, whitened_data_train_isolet = whitenDatasets(data_train_isolet, data_test_isolet, 100)
+
+	--local data_train_one_vs_all, data_test_one_vs_all = mnist:getDatasets(6000,1000)
 
 --[[
     function printDataSet()
@@ -54,18 +62,25 @@ function main()
     end
  printDataSet()
 ]]
-print(data_train_isolet)
+--print(data_train_isolet)
 -- Logistic Regression code:
-local logisticRegressionTrainer = logisticRegression(data_train_isolet)
+local logisticRegressionTrainer = logisticRegression(data_train_isolet, data_test_isolet)
+
+--local logisticRegressionTrainer = logisticRegression(data_train_one_vs_all)
+
 -- local logisticRegression_loss_train, logisticRegression_error_train = trainer:train(data_train_isolet) -- train using some examples
 -- local logisticRegression_loss_test, logisticRegression_error_test = trainer:test(data_test_isolet) -- test using some datapoints
-print("Pro")
+--print("Pro")
 --print(data_train_isolet)
-print(trainer:train(data_train_isolet))
+--print("complete dataset size "..data_train_one_vs_all:size())
+-- print("1's size "..data_train_isolet[1]:size())
+
+print(mlp:forward(data_test_isolet))
+--trainer:train(data_train_one_vs_all)
 
 
 
-print("Logistic Regression: Training loss is "..logisticRegression_loss_train.." Training error is "..logisticRegression_error_train.."Testing loss is "..logisticRegression_loss_test.." Testing error is "..logisticRegression_error_test)
+--print("Logistic Regression: Training loss is "..logisticRegression_loss_train.." Training error is "..logisticRegression_error_train.."Testing loss is "..logisticRegression_loss_test.." Testing error is "..logisticRegression_error_test)
 
 end
 

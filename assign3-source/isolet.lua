@@ -105,12 +105,18 @@ function isolet:split(train_size, test_size)
    -- iterate over rows
    for i = 1,train:size() do
       -- Cloning data instead of referencing, so that the datset can be split multiple times
-      train[i] = {isolet.orig.train[i][1]:clone(), isolet.orig.train[i][2]:clone()}
+      --train[i] = {isolet.orig.train[i][1]:clone(), isolet.orig.train[i][2]:clone()}
+      -- Making y label as an integer instead of tensor because of class NLLCriterion's requirements.
+      tempOutput = isolet.orig.train[i][2]:clone()
+	  train[i] = {isolet.orig.train[i][1]:clone(), tempOutput[1]}
    end
    -- iterate over rows
    for i = 1,test:size() do
       -- Cloning data instead of referencing
-      test[i] = {isolet.orig.test[i][1]:clone(), isolet.orig.test[i][2]:clone()}
+      --test[i] = {isolet.orig.test[i][1]:clone(), isolet.orig.test[i][2]:clone()}
+      -- Making y label as an integer instead of tensor because of class NLLCriterion's requirements.
+      tempOutput2 = isolet.orig.test[i][2]:clone()
+      test[i] = {isolet.orig.test[i][1]:clone(), tempOutput2[1]}
    end
 
    return train, test
