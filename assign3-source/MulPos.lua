@@ -37,8 +37,9 @@ end
 function MulPos:updateGradInput(input, gradOutput) 
    self.gradInput:zero()
    -- self.gradInput:add(self.weight[1], gradOutput)
-   gradOut_mul_e_pow_X = gradOutput:mul(math.exp(self.gradWeight[1]))
-   self.gradInput:add(self.weight[1], gradOut_mul_e_pow_X)
+   -- gradOut_mul_e_pow_X = gradOutput:mul(math.exp(self.gradWeight[1]))
+   -- self.gradInput:add(self.weight[1], gradOut_mul_e_pow_X)
+   self.gradInput:add(math.exp(self.weight[1]), gradOutput)
    return self.gradInput
 end
 
