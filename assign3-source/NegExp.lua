@@ -3,6 +3,7 @@ require 'nn'
 local NegExp, parent = torch.class('nn.NegExp', 'nn.Module')
 
 function NegExp:updateOutput(input)
+   -- return input.nn.Exp_updateOutput(self, input)
    return input.nn.Exp_updateOutput(self, input:mul(-1))
 end
 
