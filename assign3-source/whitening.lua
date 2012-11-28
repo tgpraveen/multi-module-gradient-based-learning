@@ -10,6 +10,11 @@ function whitenDatasets(train, test, k)
     for i=1,train:features() do
     temptransposable[i]=particulartrainsamplefeatures[i]
 	end
+    print("particulartrainsamplefeatures is:")
+    print(particulartrainsamplefeatures)
+    print("temptransposable is:")
+    print(temptransposable)
+    print("i is: "..i)
 	return temptransposable
     end    
 
@@ -31,7 +36,7 @@ function whitenDatasets(train, test, k)
 
 	local u,s,v = torch.svd(sigmatrain)
 
-	local ureduce = {}
+	local ureduce = torch.Tensor(train:features(),k)
 
 	for j = 1,train:features() do
 		for l = 1,k do

@@ -230,7 +230,7 @@ mlp = nn.Sequential();
 inputs = traindataset:features(); outputs = 1; HUs = traindataset:classes(); -- parameters
 mlp:add(nn.RBF(inputs, HUs))
 mlp:add(nn.NegExp())
-mlp:add(nn.Linear(HUs*2, HUs))
+mlp:add(nn.Linear(HUs, HUs))
 mlp:add(nn.LogSoftMax())
 
 
@@ -334,7 +334,7 @@ mlp = nn.Sequential();
 inputs = traindataset:features(); outputs = 1; HUs = traindataset:classes(); -- parameters
 mlp:add(nn.RBF(inputs, HUs))
 mlp:add(nn.NegExp())
-mlp:add(nn.Linear(HUs*2, HUs))
+mlp:add(nn.Linear(HUs, HUs))
 mlp:add(nn.LogSoftMax())
 
 

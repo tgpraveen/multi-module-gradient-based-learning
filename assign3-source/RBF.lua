@@ -36,13 +36,12 @@ function RBF:reset(stdv)
 for i=1,self.weight:size(1) do
 self.weight[i] = torch.uniform(-stdv, stdv);
 end
-   
 end
 
 function RBF:updateOutput(input)
    self.output:zero()
    for o = 1,self.weight:size(1) do
-      self.output = self.output + math.pow(input[o]-self.weight[o],2)
+      self.output[o] = self.output[o] + math.pow(input[o]-self.weight[o],2)
    end
    return self.output
 end
@@ -51,18 +50,21 @@ function RBF:updateGradInput(input, gradOutput)
    self:updateOutput(input)
    if self.gradInput then
       self.gradInput:zero()
-      for o = 1,self.weight:size(2) do
---[[         if self.output[o] ~= 0 then
+    --  for o = 1,self.weight:size(1) do
+--[[        if self.output[o] ~= 0 then
             self.temp:copy(input):add(-1,self.weight:select(2,o))
             self.temp:mul(gradOutput[o]/self.output[o])
             self.gradInput:add(self.temp)
-    --]]    end
-  self.gradInput[o] = self.gradInput[o] + torch.mul(gradOutput[o], math.mul(math.sqrt(self.output),2))
+        end
+--]]
+print("self.output is:")
+print(self.output)
+  self.gradInput = torch.mul(gradOutput, (self.output*2))
 
-      end
+    --  end
       return self.gradInput
    end
--- end
+end
 
 function RBF:accGradParameters(input, gradOutput, scale)
    self:updateOutput(input)
@@ -75,6 +77,6 @@ function RBF:accGradParameters(input, gradOutput, scale)
       end
    end --]]
 for o=1,self.gradWeight:size(1) do 
- self.gradWeight[o] = self.gradWeight[o] + torch.mul(gradOutput[o], math.mul(math.sqrt(self.output),-2))
+ self.gradWeight[o] = self.gradWeight[o] + scale*(gradOutput[o] * math.mul(math.sqrt(self.output),-2))
 end
 end
