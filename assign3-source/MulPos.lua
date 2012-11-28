@@ -1,4 +1,4 @@
-`require 'nn' 
+require 'nn' 
 
 --use math.exp(w) ??
 
@@ -39,17 +39,29 @@ function MulPos:updateGradInput(input, gradOutput)
    -- self.gradInput:add(self.weight[1], gradOutput)
    -- gradOut_mul_e_pow_X = gradOutput:mul(math.exp(self.gradWeight[1]))
    -- self.gradInput:add(self.weight[1], gradOut_mul_e_pow_X)
-   self.gradInput:add(math.exp(self.weight[1]), gradOutput)
+
+self.gradInput:add((math.exp(self.weight[1])), gradOutput)
    return self.gradInput
 end
 
 function MulPos:accGradParameters(input, gradOutput, scale) 
+   -- print("In MulPos:accGradParameters().")
    -- scale is learning rate.
    scale = scale or 1
    -- For normal Mul, Y=w*X, E=(1/2)*(wX-Y)^2, gradOutput=(wX-Y) ie Predicted - Actual, dE/dW=X.gradOutput    X-> Input
    -- For MulPos, Y=e^w*X, E=(1/2)*(e^w*X-Y)^2, gradOutput=(e^w*X-Y) ie Predicted - Actual, dE/dW=e^w*X.gradOutput X-> Input
    -- self.gradWeight[1] = self.gradWeight[1] + scale*input:dot(gradOutput);
-   e_pow_input_mul_input = input:mul(math.exp(self.gradWeight[1]))
+   -- local e_pow_input_mul_input = torch.mul(input, math.exp(self.weight[1]))
+   -- torch:mul(e_pow_input_mul_input, input, math.exp(self.weight[1]))
    -- gradOut_dot_input = input:dot(gradOutput)
-   self.gradWeight[1] = self.gradWeight[1] + scale*e_pow_input_mul_input:dot(gradOutput);
+   
+
+-- self.gradWeight[1] = self.gradWeight[1] + scale*(torch.mul(input, math.exp(self.weight[1]))):dot(gradOutput);
+
+   -- self.gradWeight[1] = self.gradWeight[1] + scale*input:dot(gradOutput);
+
+  local tempOut = self.output:clone()
+  -- local tempOut = (input:mul(math.exp(self.weight[1]))):clone()
+  self.gradWeight[1] = self.gradWeight[1] + scale*tempOut:dot(gradOutput);
+
 end
