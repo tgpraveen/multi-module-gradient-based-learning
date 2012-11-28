@@ -25,11 +25,12 @@ require("nn")
 --include("model.lua")
 
 require("libnn")
-include("RBF.lua")
-include("MulPos.lua")
-include("NegExp.lua")
+--include("RBF.lua")
+--include("MulPos.lua")
+--include("NegExp.lua")
+--include("RBF.lua")
 
-dofile("Q_4_1_and_2.lua")
+-- dofile("Q_4_1_and_2.lua")
 
 function main()
 
@@ -79,7 +80,9 @@ function main()
 --print(data_train_isolet)
 -- Logistic Regression code:
 --local logisticRegressionTrainer, logisticRegressionMLP, logisticRegressionTestError = logisticRegression(data_train_isolet, data_test_isolet)
-local twoLayerNNTrainer, twoLayerNNMLP, twoLayerTestError = twoLayerNN(data_train_isolet, data_test_isolet)
+-- local twoLayerNNTrainer, twoLayerNNMLP, twoLayerTestError = twoLayerNN(data_train_isolet, data_test_isolet)
+
+local rbfModelTrainer, rbfModelNNMLP, rbfModelTestError = rbfModelConstructor(data_train_isolet, data_test_isolet)
 
 --local logisticRegressionTrainer = logisticRegression(data_train_one_vs_all)
 

@@ -1,8 +1,8 @@
 function whitenDatasets(train, test, k)
 	-- whitentrain = {}
 	-- whitentest = {}
-	sigmasummationpart = torch.zeros(train:features(), train:features())
-	sigmatrain = {}
+	local sigmasummationpart = torch.zeros(train:features(), train:features())
+	local sigmatrain = {}
     
 
     function makeItTransposable(particulartrainsamplefeatures)
@@ -23,15 +23,15 @@ function whitenDatasets(train, test, k)
 	    -- print(torch.mm(makeItTransposable(train[i][1]),makeItTransposable(train[i][1]):t()))
         -- print("PRINTED transpose above.")
 		-- sigmasummationpart = torch.add(sigmasummationpart,torch.mm(train[i][1],train[i][1]:transpose(1,2)))
-        print(i)
+        -- print(i)
         sigmasummationpart = torch.add(sigmasummationpart,torch.mm(makeItTransposable(train[i][1]),makeItTransposable(train[i][1]):t()))
 	end
 
 	sigmatrain = torch.div(sigmasummationpart,train:size())
 
-	u,s,v = torch.svd(sigmatrain)
+	local u,s,v = torch.svd(sigmatrain)
 
-	ureduce = {}
+	local ureduce = {}
 
 	for j = 1,train:features() do
 		for l = 1,k do

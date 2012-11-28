@@ -10,7 +10,7 @@ function k_collection:size() return 11 end
 local data_train_isolet, data_test_isolet = isolet:getDatasets(600,100)
 
 for i=1, k_collection:size() do
-local whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i] = whitenDatasets(data_train_isolet, data_test_isolet, k_collection[i])
+whitened_data_train_isolet_collection[i], whitened_data_test_isolet_collection[i] = whitenDatasets(data_train_isolet, data_test_isolet, k_collection[i])
 end
 
 -- For Logistic Regression
@@ -19,26 +19,26 @@ local logisticRegressionTrainer = {}
 local logisticRegressionMLP = {}
 
 for i=1, k_collection:size() do
-local logisticRegressionTrainer[i], logisticRegressionMLP[i], various_test_error_for_different_k_logistic_regression[i] = logisticRegression(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
+logisticRegressionTrainer[i], logisticRegressionMLP[i], various_test_error_for_different_k_logistic_regression[i] = logisticRegression(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
 end
 
 -- For 2 Layer Neural Network
 local various_test_error_for_different_k_2_layer_neural_network = {}
-local 2_layer_neural_network_RegressionTrainer = {}
-local 2_layer_neural_network_RegressionMLP = {}
+local two_layer_neural_network_RegressionTrainer = {}
+local two_layer_neural_network_RegressionMLP = {}
 
 for i=1, k_collection:size() do
-local 2_layer_neural_network_RegressionTrainer[i], 2_layer_neural_network_RegressionMLP[i], various_test_error_for_different_k_2_layer_neural_network[i] = twoLayerNN(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
+two_layer_neural_network_RegressionTrainer[i], two_layer_neural_network_RegressionMLP[i], various_test_error_for_different_k_2_layer_neural_network[i] = twoLayerNN(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
 end
 
 
 -- For RBF Network,
-local various_test_error_for_different_k_2_layer_neural_network = {}
-local 2_layer_neural_network_RegressionTrainer = {}
-local 2_layer_neural_network_RegressionMLP = {}
+local various_test_error_for_different_k_rbf_network = {}
+local rbf_RegressionTrainer = {}
+local rbf_RegressionMLP = {}
 
 for i=1, k_collection:size() do
-local 2_layer_neural_network_RegressionTrainer[i], 2_layer_neural_network_RegressionMLP[i], various_test_error_for_different_k_2_layer_neural_network[i] = RBF(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
+rbf_RegressionTrainer[i], rbf_RegressionMLP[i], various_test_error_for_different_k_rbf[i] = RBF(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
 end
 
 --[[
@@ -50,7 +50,7 @@ local beats_all_models_RegressionTrainer = {}
 local beats_all_models_RegressionMLP = {}
 
 for i=1, k_collection:size() do
-local beats_all_models_RegressionTrainer[i], beats_all_models_RegressionMLP[i], various_test_error_for_different_k_beats_all_models[i] = beatsAllModels(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
+beats_all_models_RegressionTrainer[i], beats_all_models_RegressionMLP[i], various_test_error_for_different_k_beats_all_models[i] = beatsAllModels(whitened_data_train_isolet_collection[i], whitened_data_train_isolet_collection[i])
 end
 
 --]]
